@@ -1,0 +1,23 @@
+{
+  "extends": ["./.eslintrc"],
+  "rules": {
+    "no-console": 2,
+    "react/jsx-no-bind": "error",
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-debugger": "error",
+
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-unsafe-return": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "all",
+        "varsIgnorePattern": "^jsx$",
+        "argsIgnorePattern": "[Ii]gnored$"
+      }
+    ]
+  }
+}

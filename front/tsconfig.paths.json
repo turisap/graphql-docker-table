@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@providers": ["src/providers/"],
+      "@assets/*": ["src/assets/"],
+      "@hooks": ["src/hooks/index.ts"],
+      "@utils": ["src/utils/index.ts"],
+      "@types": ["src/types.ts"],
+      "@generated": ["__generated__/types.ts"]
+    }
+  }
+}

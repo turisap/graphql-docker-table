@@ -1,0 +1,94 @@
+{
+  "name": "front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.2.7",
+    "@craco/craco": "^5.8.0",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.1",
+    "@testing-library/user-event": "^12.2.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.19.4",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9",
+    "@types/react-table": "^7.0.25",
+    "@types/styled-components": "^5.1.4",
+    "@welldone-software/why-did-you-render": "^6.0.3",
+    "antd": "^4.8.5",
+    "apollo": "^2.31.1",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "immer": "^8.0.0",
+    "netlify-cli": "^2.68.4",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "react-table": "^7.6.2",
+    "styled-components": "^5.2.1",
+    "typescript": "^4.0.5",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "node -r dotenv/config ./node_modules/.bin/craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "netlify:deploy": "netlify deploy --prod -m \"$(git log -1 --pretty=%B)\"",
+    "prestart": "graphql-codegen --config codegen.yml",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:prod": "eslint 'src/**/*.{ts,tsx}' --config ./eslintrc-prod.json",
+    "check-svg": "svgo src/**/*.svg"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "1.19.4",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typescript": "1.19.0",
+    "@graphql-codegen/typescript-operations": "1.17.12",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "customize-cra": "^1.0.0",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": ">=4",
+    "lint-staged": ">=10",
+    "svgo": "^1.3.2",
+    "typescript-plugin-styled-components": "^1.4.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(tsx|ts)": [
+      "yarn lint:prod",
+      "git add"
+    ],
+    "*.(scss|css)": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.svg": [
+      "yarn check-svg",
+      "git add"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+version: "3.1"
+
+services:
+  db:
+    build:
+      context: ./back
+      dockerfile: ./docker/db/Dockerfile
+    networks:
+      - tb_network
+    restart: always
+    container_name: db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+
+  api:
+    build:
+      context: ./back
+      dockerfile: ./docker/prod_app/Dockerfile
+    networks:
+      - tb_network
+    container_name: api
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_NAME: ${POSTGRES_NAME}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      DB: ${DB}
+      API_PORT: ${API_PORT}
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - db
+
+  front:
+    build:
+      context: ./front
+    networks:
+      - tb_network
+    container_name: front_app
+    ports:
+      - "${FRONT_PORT}:${FRONT_PORT}"
+    depends_on:
+      - db
+      - api
+
+networks:
+  tb_network:
+    driver: bridge
+    name: tb_network
+    external: true
+volumes:
+  db-data:
