@@ -37,7 +37,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "netlify:deploy": "netlify deploy --prod -m \"$(git log -1 --pretty=%B)\"",
-    "prestart": "graphql-codegen --config codegen.yml",
+    "prestart": "node -r dotenv/config ./node_modules/.bin/graphql-codegen --config codegen.yml dotenv_config_path=../.env",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:prod": "eslint 'src/**/*.{ts,tsx}' --config ./eslintrc-prod.json",
     "check-svg": "svgo src/**/*.svg"

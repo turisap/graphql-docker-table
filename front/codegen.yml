@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://localhost:8080/graphql"
+schema: "http://${API_HOST}:${API_PORT}/graphql"
 documents: "src/**/*.ts"
 generates:
   ./__generated__/types.ts:
